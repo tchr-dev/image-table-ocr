@@ -27,7 +27,8 @@ def main(image_file, tess_args):
     if not tess_args:
         d = os.path.dirname(sys.modules["table_ocr"].__file__)
         tessdata_dir = os.path.join(d, "tessdata")
-        tess_args = ["--psm", "7", "-l", "table-ocr", "--tessdata-dir", tessdata_dir]
+        # tess_args = ["--psm", "7", "-l", "table-ocr", "--tessdata-dir", tessdata_dir]
+        tess_args = ["--psm", "7", "-l", "chi_sim+eng", "--tessdata-dir", tessdata_dir]
     txt = ocr_image(cropped, " ".join(tess_args))
     with open(out_txtpath, "w") as txt_file:
         txt_file.write(txt)
@@ -79,6 +80,8 @@ def crop_to_text(image):
         cropped = MAX_COLOR_VAL * np.ones(shape=(20, 100), dtype=np.uint8)
     bordered = cv2.copyMakeBorder(cropped, 5, 5, 5, 5, cv2.BORDER_CONSTANT, None, 255)
     return bordered
+
+
 def ocr_image(image, config):
     return pytesseract.image_to_string(
         image,

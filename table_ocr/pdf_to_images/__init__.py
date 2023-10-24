@@ -65,7 +65,7 @@ def preprocess_img(filepath, tess_params=None):
     with the default oem (3).
     """
     if tess_params is None:
-        tess_params = ["--psm", "0", "--oem", "0"]
+        tess_params = ["--psm", "0", "--oem", "0", "-l", "chi_sim"]
     rotate = get_rotate(filepath, tess_params)
     logger.debug("Rotating {} by {}.".format(filepath, rotate))
     mogrify(filepath, rotate)
